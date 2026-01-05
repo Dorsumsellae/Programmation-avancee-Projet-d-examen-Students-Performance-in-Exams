@@ -1,1 +1,5 @@
 kaggle
+matplotlib
+numpy
+pandas
+seaborn
