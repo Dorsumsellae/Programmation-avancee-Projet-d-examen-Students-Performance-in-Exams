@@ -223,7 +223,7 @@ Le modèle final a été sauvegardé sous models/exam\_tuned.joblib pour le dép
 ## 1. Limites actuelles
 
 ### Données et Pouvoir Prédictif
-- **Explicabilité limitée (Proxy Features)** : Les variables disponibles (niveau d'éducation des parents, déjeuner) sont des indicateurs socio-économiques indirects. Il manque des variables causales directes (heures d'étude, assiduité, motivation, QI) pour expliquer la variance restante. Cela se reflète dans les scores de régression ($R^2 \approx 0.30$) qui plafonnent quel que soit le modèle utilisé.
+- **Variables limitée** : Les variables disponibles (niveau d'éducation des parents, déjeuner) sont des indicateurs socio-économiques indirects. Il manque des variables causales directes (heures d'étude, assiduité, motivation, QI) pour expliquer la variance restante. Cela se reflète dans les scores de régression ($R^2 \approx 0.30$) qui plafonnent quel que soit le modèle utilisé.
 - **Taille de l'échantillon** : Avec seulement 1000 entrées, le dataset est trop petit pour garantir une généralisation robuste, augmentant le risque de sur-apprentissage (overfitting) sur les modèles complexes comme les arbres profonds.
 - **Biais géographique/culturel** : Les données semblent spécifiques à un système éducatif américain (ex: "ethnicity groups"), rendant les modèles peu transposables à d'autres contextes sans ré-entraînement.
 
