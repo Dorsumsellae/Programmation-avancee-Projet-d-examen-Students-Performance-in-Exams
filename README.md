@@ -9,12 +9,20 @@ Ce projet implémente un pipeline de Machine Learning complet (End-to-End) pour 
 
 Classification : Prédire si un étudiant va échouer ou réussir (Target: exam passed), avec une priorité sur la détection des élèves en difficulté (Recall).
 
-Régression : Estimer le score précis (Target: math score,  moyenne reading score et writing score, moyenne générale).
+Régression : Estimer le score précis (Target: math score, moyenne reading score et writing score, moyenne générale).
 
 Nous nous concentrons principalement sur la tâche de classification binaire (exam passed).
 
+# Explication de la structure du projet
+- `src/` : code Python du pipeline (ingestion, features, modèles).
+- `data/raw/` : données brutes (ignorées par git).
+- `data/processed/` : données traitées et prêtes à être utilisées pour l'entraînement des modèles.
+- `notebooks/` : explorations et prototypes.
+- `models/` : artefacts de modèles si exportés.
+- `reports/` : figures, rapports générés.
+
 # Installation et environnement
-- Python 3.10+.
+- Environnement requis : Python 3.10+.
 - Installer les dépendances :
 	- `pip install -r requirements.txt`
 
@@ -54,9 +62,10 @@ Cette section examine chaque variable individuellement pour comprendre sa distri
 - Calcul des effectifs et pourcentages pour chaque modalité
 - Visualisation avec des graphiques en barres annotés montrant les distributions
 - Identification des déséquilibres ou particularités dans les données
+- Encodage en variables numériques
 
-**Variables numériques (Scores) :**
-- Calcul de statistiques descriptives complètes pour les trois scores (mathématiques, lecture, écriture) : moyenne, médiane, mode, écart-type, variance, asymétrie, aplatissement
+**Variables numériques (notes) :**
+- Calcul de statistiques descriptives complètes pour les trois notes (mathématiques, lecture, écriture) : moyenne, médiane, mode, écart-type, variance, asymétrie, aplatissement
 - Visualisation avec histogrammes incluant les lignes de moyenne et médiane
 - Création de boîtes à moustaches pour détecter visuellement les valeurs aberrantes
 - Application de la méthode IQR (Interquartile Range) pour quantifier précisément les outliers
@@ -209,14 +218,6 @@ Nous avons sélectionné le modèle **XGBoost optimisé via GridSearchCV**.
 3. **Robustesse :** XGBoost gère mieux la variance que les modèles linéaires sur ce type de données catégorielles complexes.
 
 Le modèle final a été sauvegardé sous models/exam\_tuned.joblib pour le déploiement.
-
-# Explication de la structure du projet
-- `src/` : code Python du pipeline (ingestion, features, modèles).
-- `data/raw/` : données brutes (ignorées par git).
-- `data/processed/` : données traitées et prêtes à être utilisées pour l'entraînement des modèles.
-- `notebooks/` : explorations et prototypes.
-- `models/` : artefacts de modèles si exportés.
-- `reports/` : figures, rapports générés.
 
 # Limites / pistes d'amélioration
 
