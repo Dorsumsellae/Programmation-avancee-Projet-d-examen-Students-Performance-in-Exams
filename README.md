@@ -219,10 +219,26 @@ Le modèle final a été sauvegardé sous models/exam\_tuned.joblib pour le dép
 - `reports/` : figures, rapports générés.
 
 # Limites / pistes d'amélioration
-À compléter.
+
+## 1. Limites actuelles
+
+### Données et Pouvoir Prédictif
+- **Explicabilité limitée (Proxy Features)** : Les variables disponibles (niveau d'éducation des parents, déjeuner) sont des indicateurs socio-économiques indirects. Il manque des variables causales directes (heures d'étude, assiduité, motivation, QI) pour expliquer la variance restante. Cela se reflète dans les scores de régression ($R^2 \approx 0.30$) qui plafonnent quel que soit le modèle utilisé.
+- **Taille de l'échantillon** : Avec seulement 1000 entrées, le dataset est trop petit pour garantir une généralisation robuste, augmentant le risque de sur-apprentissage (overfitting) sur les modèles complexes comme les arbres profonds.
+- **Biais géographique/culturel** : Les données semblent spécifiques à un système éducatif américain (ex: "ethnicity groups"), rendant les modèles peu transposables à d'autres contextes sans ré-entraînement.
+
+### Performance des Modèles
+- **Compromis Précision/Rappel** : Pour la classification, nous avons maximisé le *Recall* (détection des échecs) au détriment de la *Précision*. Le modèle génère un nombre significatif de Faux Positifs (élèves signalés à risque mais qui réussissent), ce qui pourrait saturer les ressources d'accompagnement scolaire.
+- **Modélisation de la Régression** : Les modèles linéaires performant aussi bien, voire mieux, que les modèles non-linéaires (XGBoost/RF) suggèrent que le bruit dans les données domine le signal pour la prédiction précise des notes.
+
+## 2. Pistes d'amélioration
+
+### Data Science & Feature Engineering
+- **Enrichissement des données** : Collecter des données comportementales (absentéisme, participation en classe) permettrait d'améliorer les performances actuelles.
+
 
 # Références
-Voir la page Kaggle et la bibliographie utilisée (à compléter).
+Voir la page Kaggle.
 
 # Authors
 - Joseph MINCHIN
