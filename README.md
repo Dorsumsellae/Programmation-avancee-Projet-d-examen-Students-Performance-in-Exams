@@ -224,7 +224,7 @@ Le modèle final a été sauvegardé sous models/exam\_tuned.joblib pour le dép
 
 ### Données et Pouvoir Prédictif
 - **Variables limitée** : Les variables disponibles (niveau d'éducation des parents, déjeuner) sont des indicateurs socio-économiques indirects. Il manque des variables causales directes (heures d'étude, assiduité, motivation, QI) pour expliquer la variance restante. Cela se reflète dans les scores de régression ($R^2 \approx 0.30$) qui plafonnent quel que soit le modèle utilisé.
-- **Taille de l'échantillon** : Avec seulement 1000 entrées, le dataset est trop petit pour garantir une généralisation robuste, augmentant le risque de sur-apprentissage (overfitting) sur les modèles complexes comme les arbres profonds.
+- **Taille de l'échantillon** : Avec seulement 1000 entrées, le dataset est trop petit, pour garantir une généralisation robuste, d'autant plus qu'une division de ce dernier pour l'entraînement et les tests est obligatoire, ce qui augmente encore le risque de sur-apprentissage (overfitting) sur les modèles complexes comme les arbres profonds.
 - **Biais géographique/culturel** : Les données semblent spécifiques à un système éducatif américain (ex: "ethnicity groups"), rendant les modèles peu transposables à d'autres contextes sans ré-entraînement.
 
 ### Performance des Modèles
@@ -235,6 +235,7 @@ Le modèle final a été sauvegardé sous models/exam\_tuned.joblib pour le dép
 
 ### Data Science & Feature Engineering
 - **Enrichissement des données** : Collecter des données comportementales (absentéisme, participation en classe) permettrait d'améliorer les performances actuelles.
+- **Augmentation de la taille de l'échantillon** : Rescenser plus d'individus permettrait d'accroître la taille de l'échantillon et réduirait le risque de sur-apprentissage, ce qui le renderait plus efficace encore 
 
 
 # Références
