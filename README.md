@@ -20,7 +20,7 @@ Nous nous concentrons principalement sur la tâche de classification binaire (ex
 
 # Télécharger les données
 1) Créer un token Kaggle : Profile → Settings → "Create Legacy API Key" → récupère `kaggle.json`.
-2) Placer le fichier dans `C:\Users\<vous>\.kaggle\kaggle.json` (Windows). Alternativement, définir les variables d’environnement `KAGGLE_USERNAME` et `KAGGLE_KEY`.
+2) Placer le fichier dans `C:\Users\<vous>\.kaggle\kaggle.json` (Windows). Alternativement, définir les variables d'environnement `KAGGLE_USERNAME` et `KAGGLE_KEY`.
 3) Depuis la racine du projet :
 	 - `python src/data/download_data.py`
 	 - Options : `--dataset spscientist/students-performance-in-exams`, `--filename StudentsPerformance.csv`, `--raw-dir data/raw`.
@@ -30,7 +30,114 @@ Nous nous concentrons principalement sur la tâche de classification binaire (ex
 A compléter.
 
 # Résumé EDA
-À compléter.
+
+## Description
+Le notebook `02_eda_complete_final_v2.ipynb` présente une analyse exploratoire complète et approfondie du dataset Students Performance in Exams. L'objectif principal est d'examiner en profondeur les distributions des variables, d'analyser les relations et corrélations entre elles, et d'identifier les facteurs clés influençant les performances académiques des étudiants. Cette analyse servira de base pour la phase de modélisation prédictive.
+
+## Structure du notebook
+
+### 1. Chargement et aperçu des données
+Cette section initiale permet de préparer l'environnement de travail et de découvrir le dataset :
+- Import des bibliothèques nécessaires (pandas, numpy, matplotlib, seaborn)
+- Configuration du style de visualisation pour assurer la cohérence graphique
+- Chargement du dataset depuis le repository GitHub
+- Traduction des colonnes et valeurs en français pour faciliter l'interprétation
+- Affichage des premières lignes du dataset
+- Vérification complète de la qualité des données : recherche de valeurs manquantes, détection de doublons, analyse des types de données
+- Statistiques descriptives de base pour chaque variable
+
+### 2. Analyse univariée
+Cette section examine chaque variable individuellement pour comprendre sa distribution et ses caractéristiques.
+
+**Variables catégorielles :**
+- Analyse détaillée des 5 variables catégorielles (genre, origine ethnique, niveau d'éducation des parents, type de déjeuner, cours de préparation)
+- Calcul des effectifs et pourcentages pour chaque modalité
+- Visualisation avec des graphiques en barres annotés montrant les distributions
+- Identification des déséquilibres ou particularités dans les données
+
+**Variables numériques (Scores) :**
+- Calcul de statistiques descriptives complètes pour les trois scores (mathématiques, lecture, écriture) : moyenne, médiane, mode, écart-type, variance, asymétrie, aplatissement
+- Visualisation avec histogrammes incluant les lignes de moyenne et médiane
+- Création de boîtes à moustaches pour détecter visuellement les valeurs aberrantes
+- Application de la méthode IQR (Interquartile Range) pour quantifier précisément les outliers
+- Analyse de la forme des distributions (normalité, asymétrie)
+
+### 3. Analyse bivariée
+Cette section explore les relations entre deux variables à la fois pour identifier les dépendances et influences.
+
+**Corrélations entre scores :**
+- Calcul de la matrice de corrélation de Pearson entre les trois scores
+- Visualisation avec une heatmap colorée montrant l'intensité des corrélations
+- Création d'un pairplot pour visualiser graphiquement toutes les relations deux à deux
+- Identification des scores fortement corrélés
+
+**Impact des variables catégorielles sur les scores :**
+- **Genre** : Boxplots comparant les distributions des scores entre hommes et femmes, analyse des différences moyennes
+- **Niveau d'éducation des parents** : Visualisation de l'influence du capital culturel sur la réussite, identification d'une tendance progressive
+- **Type de déjeuner** : Violin plots révélant l'impact socio-économique, comparaison entre déjeuner standard et gratuit/réduit
+- **Cours de préparation** : Analyse de l'efficacité de cette intervention pédagogique, calcul du gain moyen
+- **Origine ethnique** : Comparaison des performances moyennes entre les différents groupes ethniques
+
+Chaque analyse est accompagnée d'observations détaillées expliquant les patterns observés, les écarts quantitatifs et leurs implications.
+
+### 4. Analyse multivariée
+Cette section étudie les interactions entre plusieurs variables simultanément pour comprendre les effets combinés.
+
+**Interactions analysées :**
+- **Genre × Cours de préparation** : Évaluation de l'effet combiné du genre et du cours de préparation sur les scores, vérification si le bénéfice du cours diffère selon le genre
+- **Type de déjeuner × Cours de préparation** : Analyse de la compensation potentielle des inégalités socio-économiques par le cours de préparation
+- Visualisation avec des barplots groupés permettant de comparer facilement les moyennes de chaque sous-groupe
+- Observations sur la nature des effets : additifs (effets indépendants qui s'additionnent) ou multiplicatifs (effets qui se renforcent mutuellement)
+
+### 5. Feature Engineering
+Cette section crée de nouvelles variables dérivées pour enrichir l'analyse et faciliter la modélisation future.
+
+**Nouvelles variables créées :**
+- `score_total` : Somme des trois scores (mathématiques + lecture + écriture), donnant une vue globale de la performance
+- `score_moyen` : Moyenne des trois scores, indicateur synthétique de performance
+- `categorie_performance` : Classification des étudiants en 5 niveaux (Excellent ≥80, Bien ≥70, Moyen ≥60, Passable ≥50, Faible <50)
+- `meilleure_matiere` : Identification de la matière où l'étudiant excelle (score maximal)
+- `matiere_faible` : Identification de la matière la plus difficile pour l'étudiant (score minimal)
+
+**Visualisations :**
+- Histogramme du score total montrant la distribution globale
+- Graphique en barres des catégories de performance
+- Distribution de la meilleure matière par étudiant
+- Distribution de la matière la plus faible
+- Observations sur les profils d'étudiants identifiés
+
+### 6. Conclusions et recommandations
+Cette section finale synthétise les découvertes et oriente vers la modélisation prédictive.
+
+**Contenu :**
+- Résumé exécutif avec tous les chiffres clés et insights principaux
+- Liste des variables les plus importantes identifiées pour la modélisation (cours de préparation, type de déjeuner, niveau d'éducation des parents, genre)
+- Impact quantifié de chaque variable (gains moyens, écarts observés)
+- Recommandations d'encodage des variables catégorielles (One-Hot Encoding)
+- Algorithmes de machine learning suggérés : Random Forest (pour capturer les interactions), XGBoost (pour la performance optimale), Régression linéaire (comme baseline)
+- Discussion des prochaines étapes : preprocessing, split train/test, entraînement, évaluation
+
+## Méthodologie
+
+### Approche de visualisation
+- Utilisation systématique de seaborn et matplotlib pour créer des visualisations professionnelles et informatives
+- Application d'une palette de couleurs cohérente tout au long du notebook pour faciliter la lecture
+- Ajout d'annotations statistiques sur les graphiques (moyennes, médianes, effectifs, pourcentages)
+- Choix de types de graphiques adaptés à chaque type d'analyse (barres, histogrammes, boxplots, violin plots, heatmaps, pairplots)
+
+### Structure des observations
+Chaque graphique est systématiquement suivi d'une cellule markdown contenant des observations structurées :
+- **Description générale** : Ce qu'on observe visuellement dans le graphique
+- **Analyse quantitative** : Chiffres précis, écarts, moyennes, différences entre groupes
+- **Interprétation des patterns** : Explication des tendances, relations de cause à effet potentielles
+- **Implications** : Conséquences pour l'analyse, importance pour la modélisation, recommandations
+- Format en 5 lignes permettant une lecture rapide tout en fournissant suffisamment de détails
+
+### Reproductibilité
+- Chargement des données directement depuis GitHub pour assurer la reproductibilité
+- Code organisé en cellules logiques et documentées
+- Commentaires en français pour faciliter la compréhension
+- Exécutable dans Google Colab ou Jupyter Notebook sans configuration particulière
 
 # Résumé de modélisation
 
@@ -111,7 +218,7 @@ Le modèle final a été sauvegardé sous models/exam\_tuned.joblib pour le dép
 - `models/` : artefacts de modèles si exportés.
 - `reports/` : figures, rapports générés.
 
-# Limites / pistes d’amélioration
+# Limites / pistes d'amélioration
 À compléter.
 
 # Références
@@ -121,4 +228,4 @@ Voir la page Kaggle et la bibliographie utilisée (à compléter).
 - Joseph MINCHIN
 - Nicolas Mouton--Besson
 - Gaspard Sadourny
-- Louis Vanacker 
+- Louis Vanacker
