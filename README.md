@@ -32,7 +32,7 @@ A compléter.
 # Résumé EDA
 
 ## Description
-Le notebook `02_eda_complete_final_v2.ipynb` présente une analyse exploratoire complète et approfondie du dataset Students Performance in Exams. L'objectif principal est d'examiner en profondeur les distributions des variables, d'analyser les relations et corrélations entre elles, et d'identifier les facteurs clés influençant les performances académiques des étudiants. Cette analyse servira de base pour la phase de modélisation prédictive.
+Le notebook `02_EDA_complet.ipynb` présente une analyse exploratoire complète et approfondie du dataset Students Performance in Exams. L'objectif principal est d'examiner en profondeur les distributions des variables, d'analyser les relations et corrélations entre elles, et d'identifier les facteurs clés influençant les performances académiques des étudiants. Cette analyse servira de base pour la phase de modélisation prédictive.
 
 ## Structure du notebook
 
