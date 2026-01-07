@@ -213,7 +213,7 @@ Le modèle final a été sauvegardé sous models/exam\_tuned.joblib pour le dép
 # Explication de la structure du projet
 - `src/` : code Python du pipeline (ingestion, features, modèles).
 - `data/raw/` : données brutes (ignorées par git).
-- `data/processed/` : sorties intermédiaires.
+- `data/processed/` : données traitées et prêtes à être utilisées pour l'entraînement des modèles.
 - `notebooks/` : explorations et prototypes.
 - `models/` : artefacts de modèles si exportés.
 - `reports/` : figures, rapports générés.
